@@ -1,4 +1,4 @@
-import { Controller, Get, Header, HttpCode, Post } from '@nestjs/common';
+import { Controller, Get, Header, HttpCode, Param, Post } from '@nestjs/common';
 
 @Controller('tasks')
 export class TasksController {
@@ -11,5 +11,10 @@ export class TasksController {
   @Get()
   findAll(): string {
     return 'This is the list of tasks.';
+  }
+  @Get(':id')
+  findOne(@Param() params: any): string {
+    console.log(params.id);
+    return `This is the task whose id is ${params.id}`;
   }
 }
