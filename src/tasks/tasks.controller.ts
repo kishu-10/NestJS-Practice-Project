@@ -9,21 +9,23 @@ import {
   Put,
   Delete,
 } from '@nestjs/common';
-import { CreateTaskDto, UpdateTaskDto } from './tasks.interface';
+import { CreateTaskDto, Task, UpdateTaskDto } from './tasks.interface';
+import { TasksService } from './tasks.service';
 
 @Controller('tasks')
 export class TasksController {
+  constructor(private taskService: TasksService) {}
+
   @Post()
   @HttpCode(201)
   @Header('Cache-Control', 'none')
   async create(@Body() createTaskDto: CreateTaskDto) {
-    console.log(createTaskDto);
-    return 'New task has been added.';
+    this.taskService.create(createTaskDto);
   }
 
   @Get()
-  findAll(): string {
-    return 'This is the list of tasks.';
+  async findAll(): Promise<Task[]> {
+    return this.taskService.findAll();
   }
 
   @Get(':id')
