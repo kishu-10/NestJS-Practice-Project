@@ -1,3 +1,5 @@
+import { IsNotEmpty, MinLength } from 'class-validator';
+
 export enum taskType {
   URGENT = 'urgent',
   NORMAL = 'normal',
@@ -11,9 +13,18 @@ export interface Task {
 }
 
 export class CreateTaskDto {
+  @IsNotEmpty()
+  @MinLength(3)
   title: string;
+
+  @IsNotEmpty()
+  @MinLength(3)
   description: string;
+
+  @IsNotEmpty()
   taskType: taskType;
+
+  @IsNotEmpty()
   date: string;
 }
 

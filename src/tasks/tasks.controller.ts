@@ -9,8 +9,9 @@ import {
   Put,
   Delete,
 } from '@nestjs/common';
-import { CreateTaskDto, Task, UpdateTaskDto } from './tasks.interface';
+import { CreateTaskDto, UpdateTaskDto } from './tasks.interface';
 import { TasksService } from './tasks.service';
+import { Tasks } from './tasks.entity';
 
 @Controller('tasks')
 export class TasksController {
@@ -20,12 +21,12 @@ export class TasksController {
   @HttpCode(201)
   @Header('Cache-Control', 'none')
   async create(@Body() createTaskDto: CreateTaskDto) {
-    this.taskService.create(createTaskDto);
+    this.taskService.createTask(createTaskDto);
   }
 
   @Get()
-  async findAll(): Promise<Task[]> {
-    return this.taskService.findAll();
+  async findAll(): Promise<Tasks[]> {
+    return this.taskService.getAllTask();
   }
 
   @Get(':id')
