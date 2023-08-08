@@ -16,11 +16,11 @@ export class TasksService {
     return this.tasksRepository.save(newTask);
   }
 
-  getAllTask() {
+  getTasks() {
     return this.tasksRepository.find();
   }
 
-  // findTaskById(id: number) {
-  //   return this.tasksRepository.findBy(id);
-  // }
+  findTaskById(id: number) {
+    return this.tasksRepository.findOneBy({ id: id });
+  }
 }
