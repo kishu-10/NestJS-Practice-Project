@@ -5,7 +5,7 @@ export enum taskType {
   NORMAL = 'normal',
 }
 
-export interface Task {
+export interface TaskDto {
   title: string;
   description: string;
   taskType: taskType;

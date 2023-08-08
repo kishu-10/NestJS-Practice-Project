@@ -40,12 +40,11 @@ export class TasksController {
 
   @Put(':id')
   update(@Param('id') id: number, @Body() updateTaskDto: UpdateTaskDto) {
-    console.log(updateTaskDto);
-    return `Task with id ${id} has been updated`;
+    return this.taskService.updateTask(id, updateTaskDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: number) {
-    return `Task with id ${id} has been deleted`;
+    return this.taskService.deleteTask(id);
   }
 }

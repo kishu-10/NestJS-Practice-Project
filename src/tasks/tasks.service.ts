@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateTaskDto } from './tasks.interface';
+import { CreateTaskDto, UpdateTaskDto } from './tasks.interface';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Tasks } from './tasks.entity';
 import { Repository } from 'typeorm';
@@ -22,5 +22,21 @@ export class TasksService {
 
   findTaskById(id: number) {
     return this.tasksRepository.findOneBy({ id: id });
+  }
+
+  updateTask(id: number, updateTaskDto: UpdateTaskDto) {
+    return this.tasksRepository.update(
+      { id },
+      {
+        title: updateTaskDto.title,
+        description: updateTaskDto.description,
+        type: updateTaskDto.taskType,
+        date: updateTaskDto.date,
+      },
+    );
+  }
+
+  deleteTask(id: number) {
+    this.tasksRepository.delete(id);
   }
 }
