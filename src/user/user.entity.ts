@@ -30,5 +30,11 @@ export class User {
     nullable: false,
     default: '',
   })
+  password: string;
+
+  @Column({
+    nullable: false,
+    default: '',
+  })
   phoneNumber: string;
 }
