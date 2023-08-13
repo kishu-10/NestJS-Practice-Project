@@ -15,12 +15,12 @@ export class AuthService {
   async loginUser(loginData: LoginDataDto) {
     const { email, password } = loginData;
     const authenticatedUser = await this.userService.findUserByEmail(email);
-    const passwordMatch = authenticatedUser.password === password;
+    const passwordMatch = authenticatedUser?.password === password;
     if (!passwordMatch)
       throw new HttpException('Invalid Credential', HttpStatus.BAD_REQUEST);
 
     const payload: payloadDto = {
-      sub: authenticatedUser.id,
+      sub: authenticatedUser?.id,
       iat: Date.now(),
     };
 
